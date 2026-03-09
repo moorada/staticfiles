@@ -33,38 +33,38 @@
 .Trashes
 Thumbs.db
 
-# Temporary files
-###################
-*.swp
-*.tmp
-*.temp
-*.bak
-*.backup
-*.orig
-*.save
-*.swo
-*~
-*.pid
+# # Temporary files
+# ###################
+# *.swp
+# *.tmp
+# *.temp
+# *.bak
+# *.backup
+# *.orig
+# *.save
+# *.swo
+# *~
+# *.pid
 
-# Node.js
-###################
-node_modules/
-npm-debug.log
-yarn-error.log
-yarn-debug.log
+# # Node.js
+# ###################
+# node_modules/
+# npm-debug.log
+# yarn-error.log
+# yarn-debug.log
 
-# Python
-###################
-__pycache__/
-*.py[cod]
-*$py.class
-.env/
-.venv/
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
+# # Python
+# ###################
+# __pycache__/
+# *.py[cod]
+# *$py.class
+# .env/
+# .venv/
+# env/
+# venv/
+# ENV/
+# env.bak/
+# venv.bak/
 
 # IDEs and editors
 ###################
