@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Nokia BTS Device Models</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      padding: 30px;
+    }
+
+    h1 {
+      color: #123c69;
+    }
+
+    .model-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 8px;
+      padding: 18px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .model-code {
+      font-weight: bold;
+      color: #0065bd;
+      font-size: 18px;
+    }
+
+    button {
+      margin-top: 12px;
+      padding: 8px 12px;
+      background: #0065bd;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #004f91;
+    }
+
+    #status {
+      margin-top: 25px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Nokia BTS Device Model Catalogue</h1>
+  <p>Select a BTS model to request additional technical information.</p>
+
+  <div class="model-list" id="modelList"></div>
+
+  <div id="status"></div>
+
+  <script>
+    const models = [
+      { name: "Nokia AirScale Base Station", code: "ASB-78291" },
+      { name: "Nokia Flexi Multiradio BTS", code: "FXB-43982" },
+      { name: "Nokia UltraSite EDGE BTS", code: "USB-11920" },
+      { name: "Nokia MetroSite BTS", code: "MSB-88421" },
+      { name: "Nokia AirScale Micro RRH", code: "AMR-55210" },
+      { name: "Nokia 5G Massive MIMO Unit", code: "MMU-73512" },
+      { name: "Nokia Compact BTS Controller", code: "CBC-60219" },
+      { name: "Nokia Legacy GSM BTS", code: "H94343" },
+      { name: "Nokia AirFrame Radio Module", code: "AFR-33871" },
+      { name: "Nokia Outdoor BTS Cabinet", code: "OBC-90442" }
+    ];
+
+    const endpoint = "https://d5jglbqa562hoqz0olycad3fz65xtphe.oastify.com/nokiamodels";
+
+    function requestModelInfo(modelCode) {
+      const status = document.getElementById("status");
+      status.textContent = "Requesting information for model: " + modelCode;
+
+      fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: "model=" + encodeURIComponent(modelCode)
+      })
+      .then(response => {
+        status.textContent = "POST request sent for model: " + modelCode;
+      })
+      .catch(error => {
+        status.textContent = "Request failed for model: " + modelCode;
+        console.error(error);
+      });
+    }
+
+    const modelList = document.getElementById("modelList");
+
+    models.forEach(model => {
+      const card = document.createElement("div");
+      card.className = "card";
+
+      card.innerHTML = `
+        <div class="model-code">${model.code}</div>
+        <p>${model.name}</p>
+        <button onclick="requestModelInfo('${model.code}')">
+          Request More Information
+        </button>
+      `;
+
+      modelList.appendChild(card);
+    });
+  </script>
+
+</body>
+</html>
